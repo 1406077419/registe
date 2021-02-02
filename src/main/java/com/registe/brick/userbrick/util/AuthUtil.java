@@ -16,26 +16,29 @@ import java.util.Map;
 public class AuthUtil {
 
     //过期时间
-    private static final long EXPIRE_DATE = 4 * 1000;
+    public static final long EXPIRE_DATE = 15 * 60 * 1000;
+
+    public static final long OUT_DATE = 1 * 1000;
 
     //token秘钥
     private static final String TOKEN_SECRET = "ZCfasfhuaUUHufguGuwu2020BQWE";
 
     //token缓存
-    private static Map<String,String> authMap = new HashMap<String,String>();
+    public static Map<String, String> authMap = new HashMap<String, String>();
 
     /**
      * 创建token
+     *
      * @param userId
      * @param userName
      * @return
      */
-    public static String createToken(String userId, String userName) {
+    public static String createToken(String userId, String userName, long expireTime) {
 
         String token = "";
         try {
             //过期时间
-            Date date = new Date(System.currentTimeMillis() + EXPIRE_DATE);
+            Date date = new Date(System.currentTimeMillis() + expireTime);
             //秘钥及加密算法
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
             //设置头部信息
@@ -57,17 +60,25 @@ public class AuthUtil {
 
     /**
      * 更新token
+     *
      * @param userId
      * @param userName
      * @return
      */
-    public static String updateToken(String userId, String userName){
+    public static String updateToken(String userId, String userName, long expireTime) {
 
-        return getToken(userId,userName);
+        return getToken(userId, userName, expireTime);
+    }
+
+    public static void delToken(String userId, String userName) {
+
+        createToken(userId, userName, OUT_DATE);
+
     }
 
     /**
      * 验证token
+     *
      * @param token
      * @return
      */
@@ -87,22 +98,22 @@ public class AuthUtil {
         }
     }
 
-
     /**
      * 获取token
+     *
      * @param userId
      * @param userName
      * @return
      */
-    public static String getToken(String userId, String userName){
+    public static String getToken(String userId, String userName, long expireTime) {
         //名称转码
         String nameEncode = Base64.getEncoder()
                 .encodeToString(userName.getBytes(StandardCharsets.UTF_8));
-        String token = createToken(userId,nameEncode);
+        String token = createToken(userId, nameEncode, expireTime);
 
-        if (StringUtil.isNotEmpty(token)){
+        if (StringUtil.isNotEmpty(token)) {
             //添加到缓存
-            authMap.put(token,userId);
+            authMap.put(token, userId+","+userName);
             return token;
         }
         return null;
@@ -113,13 +124,13 @@ public class AuthUtil {
 
         String userName = "张飞";
         String userId = "1695206c-96b9-4ba5-bb6f-b07ca6461dda";
-        String token = getToken(userName,userId);
+        String token = getToken(userName, userId, EXPIRE_DATE);
 
-        System.out.println("token验证   "+verify(token));
+        System.out.println("token验证   " + verify(token));
 
         Thread.sleep(6000L);
 
-        System.out.println("token过期后验证   "+verify(token));
+        System.out.println("token过期后验证   " + verify(token));
 
     }
 }

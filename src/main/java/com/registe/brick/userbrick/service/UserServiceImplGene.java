@@ -20,6 +20,11 @@ public class UserServiceImplGene implements UserServiceGene {
     }
 
     @Override
+    public User selectByNameAndPwd(User user) {
+        return userMapper.selectByNameAndPwd(user);
+    }
+
+    @Override
     public int deleteByPrimaryKey(String userId) {
         return 0;
     }

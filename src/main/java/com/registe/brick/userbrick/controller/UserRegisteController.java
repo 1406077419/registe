@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/registe")
-public class RegisteController {
+public class UserRegisteController {
 
     @Autowired
     private UserServiceJpa userService;

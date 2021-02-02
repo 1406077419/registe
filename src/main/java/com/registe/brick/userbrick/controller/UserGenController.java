@@ -15,10 +15,12 @@ public class UserGenController {
 
 
     @RequestMapping("/queryUserById")
-    public User selectUserById() {
+    public void selectUserById() {
+
+        System.out.println("查询用户-------");
         String id = "1695206c-96b9-4ba5-bb6f-b07ca6461dda";
         User user = userService.selectByPrimaryKey(id);
         System.out.println(user.toString());
-        return user;
+        //return user;
     }
 }

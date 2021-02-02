@@ -13,6 +13,8 @@ public interface UserServiceGene {
 
     User selectByPrimaryKey(String userId);
 
+    User selectByNameAndPwd(User user);
+
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);

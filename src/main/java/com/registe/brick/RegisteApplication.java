@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan("com.registe.brick.userbrick.mapper")
+@MapperScan({"com.registe.brick.userbrick.mapper","com.registe.brick.computerbrick.mapper"})
 @EntityScan(basePackages={"com.registe.brick.userbrick.entity"})
 public class RegisteApplication {
 
