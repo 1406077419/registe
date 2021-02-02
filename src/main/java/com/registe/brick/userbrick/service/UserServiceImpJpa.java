@@ -1,19 +1,16 @@
 package com.registe.brick.userbrick.service;
 
-import com.registe.brick.userbrick.dao.UserDao;
+import com.registe.brick.userbrick.dao.UserDaoJpa;
 import com.registe.brick.userbrick.entity.User;
-import com.registe.brick.userbrick.service.impl.UserService;
+import com.registe.brick.userbrick.service.impl.UserServiceJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class UserServiceImp implements UserService {
+public class UserServiceImpJpa implements UserServiceJpa {
 
     @Autowired
-    private UserDao userDao;
+    private UserDaoJpa userDao;
 
     @Override
     public User findByName(String name) {

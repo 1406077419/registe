@@ -4,7 +4,7 @@ import com.registe.brick.userbrick.entity.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserServiceJpa {
 
 
     User findByName(String name);
