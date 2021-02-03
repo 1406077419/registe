@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 2021/1/5  fengjiale
+ */
 @Controller
 @RequestMapping("/registe")
 public class UserRegisteController {

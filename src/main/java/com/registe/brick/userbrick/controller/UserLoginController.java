@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 2021/2/2  fengjiale
+ */
 @Controller
 @RequestMapping("/login")
 public class UserLoginController {

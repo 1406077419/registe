@@ -23,10 +23,10 @@ public class Computer implements Serializable {
     private String cpu;
 
     @Column(name = "memory")
-    private String memory;
+    private int memory;
 
     @Column(name = "screen")
-    private String screen;
+    private int screen;
 
     @Column(name = "createtime")
     private long createtime;
@@ -63,19 +63,19 @@ public class Computer implements Serializable {
         this.cpu = cpu;
     }
 
-    public String getMemory() {
+    public int getMemory() {
         return memory;
     }
 
-    public void setMemory(String memory) {
+    public void setMemory(int memory) {
         this.memory = memory;
     }
 
-    public String getScreen() {
+    public int getScreen() {
         return screen;
     }
 
-    public void setScreen(String screen) {
+    public void setScreen(int screen) {
         this.screen = screen;
     }
 
@@ -86,6 +86,7 @@ public class Computer implements Serializable {
     public void setCreatetime(long createtime) {
         this.createtime = createtime;
     }
+
 
     @Override
     public String toString() {
