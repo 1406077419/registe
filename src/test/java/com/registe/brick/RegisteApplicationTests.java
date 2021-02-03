@@ -24,12 +24,6 @@ class RegisteApplicationTests {
 
         System.out.println(version);
         System.out.println(version1);
-
-        User user = new User();
-        user.setId(UUID.randomUUID().toString());
-        user.setName("huangsan2");
-        boolean saveFlag = userService.saveUser(user);
-        System.out.println(saveFlag);
     }
 
 }
