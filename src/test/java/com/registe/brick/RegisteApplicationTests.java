@@ -24,6 +24,8 @@ class RegisteApplicationTests {
 
         System.out.println(version);
         System.out.println(version1);
+
+
     }
 
 }
