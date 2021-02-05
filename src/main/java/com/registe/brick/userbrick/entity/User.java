@@ -22,6 +22,60 @@ public class User implements Serializable {
     @Column(name="age")
     private int age;
 
+    @Column(name="phone")
+    private String phone;
+
+    @Column(name="email")
+    private String email;
+
+    @Column(name="realname")
+    private String realname;
+
+    @Column(name="createtime")
+    private long createtime;
+
+    @Column(name="modifytime")
+    private long modifytime;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
+
+    public long getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(long createtime) {
+        this.createtime = createtime;
+    }
+
+    public long getModifytime() {
+        return modifytime;
+    }
+
+    public void setModifytime(long modifytime) {
+        this.modifytime = modifytime;
+    }
 
     public String getName() {
         return name;

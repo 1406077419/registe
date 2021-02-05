@@ -93,7 +93,7 @@ public class AuthUtil {
             DecodedJWT jwt = verifier.verify(token);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("身份登录信息过期，请重新登录");
             return false;
         }
     }
