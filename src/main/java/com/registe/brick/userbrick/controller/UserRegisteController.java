@@ -29,11 +29,12 @@ public class UserRegisteController {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-    private long expireTime = 10000l;
+    //过期时间过长
+    private long expireTime = 2000l;
 
-    String[] nameArr = {"关羽", "张飞", "刘备"};
+    String[] nameArr = {"关羽", "张飞", "刘备", "曹操", "马超", "孙权", "周瑜","吕布","袁绍","华雄","司马懿","曹冲","曹植"};
 
-    @RequestMapping(value = "/userregiste",method = RequestMethod.GET)
+    @RequestMapping(value = "/userregiste", method = RequestMethod.GET)
     @ResponseBody
     public int userRegiste() {
 
@@ -48,8 +49,9 @@ public class UserRegisteController {
             return 0;
         } else {
             //二次校验数据库
-            List<User> curUser = userServiceTk.getUserByName(name);
-            if (0 == curUser.size()) {
+            //高并发状态下校验数据库返回信息太多占用网络带宽和资源
+            int count = userServiceTk.getCountByName(name);
+            if (0 == count) {
                 userServiceTk.saveUser(createUser(name));
                 System.out.println(Thread.currentThread().getName() + "  --------注册成功   " + name);
                 return 1;
@@ -60,9 +62,42 @@ public class UserRegisteController {
         }
     }
 
-    @RequestMapping(value = "/userregistebydb",method = RequestMethod.GET)
+    private int sum = 5;
+
+    @RequestMapping(value = "/getCourse", method = RequestMethod.GET)
     @ResponseBody
-    public int userRegisteByDb() {
+    public void userRegisteByDb() {
+
+        String courseName = "数学";
+
+        String curNum = redisTemplate.opsForValue().get(courseName);
+        if (null != curNum) {
+            try {
+                redisTemplate.opsForValue().increment(courseName, 5);
+                System.out.println("---  抢课成功");
+            } catch (Exception e) {
+                System.out.println("&&&&   抢完了");
+
+            }
+            /*int ccNuum = Integer.parseInt(curNum);
+            if (ccNuum < sum) {
+                redisTemplate.opsForValue().setIfPresent(courseName, ++ccNuum + "",expireTime,TimeUnit.MILLISECONDS);
+            } else {
+                System.out.println("&&&&   抢完了");
+            }*/
+        } else {
+            redisTemplate.opsForValue().set(courseName,1+"");
+            System.out.println("----   第一票");
+        }
+
+        System.out.println(curNum);
+
+    }
+
+
+    @RequestMapping(value = "/userregistebydb", method = RequestMethod.GET)
+    @ResponseBody
+    public int getCourse() {
 
         String name = nameArr[(int) (Math.random() * nameArr.length)];
 
@@ -82,6 +117,9 @@ public class UserRegisteController {
         User user = new User();
         user.setId(UUID.randomUUID().toString());
         user.setName(name);
+        user.setAge((int)(Math.random() * nameArr.length));
+        user.setCreatetime(System.currentTimeMillis());
+        user.setRealname(name);
         return user;
     }
 

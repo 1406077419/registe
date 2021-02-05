@@ -15,7 +15,6 @@ public class UserServiceImpJpa implements UserServiceJpa {
     @Override
     public User findByName(String name) {
         User user = userDao.findByName("1");
-        //System.out.println(user.toString());
         return null;
     }
 
