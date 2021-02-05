@@ -22,7 +22,8 @@ public class AuthInterceptor implements HandlerInterceptor {
      */
     private String urls[] = {
             "/login/.*",
-            "/compute/.*"
+            "/compute/.*",
+            "/registe/.*"
     };
 
     /**

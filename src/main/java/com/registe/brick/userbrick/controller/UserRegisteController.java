@@ -33,9 +33,9 @@ public class UserRegisteController {
 
     String[] nameArr = {"关羽", "张飞", "刘备"};
 
-    @PostMapping(value = "/userregiste/{id}")
+    @RequestMapping(value = "/userregiste",method = RequestMethod.GET)
     @ResponseBody
-    public int userRegiste(@PathVariable("id") String id) {
+    public int userRegiste() {
 
         String name = nameArr[(int) (Math.random() * nameArr.length)];
 
@@ -57,6 +57,24 @@ public class UserRegisteController {
                 System.out.println(Thread.currentThread().getName() + "  注册失败,***入库重命名 " + name);
                 return 0;
             }
+        }
+    }
+
+    @RequestMapping(value = "/userregistebydb",method = RequestMethod.GET)
+    @ResponseBody
+    public int userRegisteByDb() {
+
+        String name = nameArr[(int) (Math.random() * nameArr.length)];
+
+        //一次校验数据库
+        List<User> curUser = userServiceTk.getUserByName(name);
+        if (0 == curUser.size()) {
+            userServiceTk.saveUser(createUser(name));
+            System.out.println(Thread.currentThread().getName() + "  --------注册成功   " + name);
+            return 1;
+        } else {
+            System.out.println(Thread.currentThread().getName() + "  注册失败,***入库重命名 " + name);
+            return 0;
         }
     }
 
@@ -103,7 +121,7 @@ public class UserRegisteController {
     }
 
     @RequestMapping("/registetest")
-    public void userRegiste() {
+    public void userRegiste2() {
 
         User user = new User();
         user.setId(UUID.randomUUID().toString());

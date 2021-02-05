@@ -29,6 +29,7 @@ public class LamdaUtil {
         greetService2.sayMessage("Google");
 
 
+
         MathOperation mathOperationAdd = ((a, b) -> a * b);
         MathOperation mathOperationSubtract = ((a, b) -> a - b);
 
