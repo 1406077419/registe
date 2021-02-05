@@ -1,4 +1,4 @@
-package com.registe.brick.userbrick.interceptor;
+package com.registe.brick.sysbrick.interceptor;
 
 
 import com.alibaba.fastjson.JSON;
@@ -23,7 +23,8 @@ public class AuthInterceptor implements HandlerInterceptor {
     private String urls[] = {
             "/login/.*",
             "/compute/.*",
-            "/registe/.*"
+            "/registe/.*",
+            "/user/.*"
     };
 
     /**

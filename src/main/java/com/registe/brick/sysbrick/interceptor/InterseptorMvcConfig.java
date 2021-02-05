@@ -1,4 +1,4 @@
-package com.registe.brick.userbrick.interceptor;
+package com.registe.brick.sysbrick.interceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
