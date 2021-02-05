@@ -1,5 +1,10 @@
 package com.registe.brick.userbrick.util;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.Example;
+
 public class PageUtil {
 
     private Integer pageNum;
@@ -25,5 +30,9 @@ public class PageUtil {
     public PageUtil(Integer pageNum, Integer pageSize) {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
+    }
+
+    public static Page getPage(PageUtil pageUtil, Example example, Mapper mapper) {
+        return PageHelper.startPage(pageUtil.getPageNum(), pageUtil.getPageSize()).doSelectPage(() -> mapper.selectByExample(example));
     }
 }

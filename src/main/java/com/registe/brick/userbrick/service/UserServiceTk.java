@@ -4,10 +4,12 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.registe.brick.userbrick.entity.User;
+import com.registe.brick.userbrick.mapper.UserMapper;
 import com.registe.brick.userbrick.mapper.UserTkMapper;
 import com.registe.brick.userbrick.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
@@ -119,6 +121,11 @@ public class UserServiceTk {
         // 第二种 一条lamda拼接所有条件处理
         Page<User> page = PageHelper.startPage(pageUtil.getPageNum(), pageUtil.getPageSize()).doSelectPage(() -> userMapper.selectByExample(example));
         List<User> userList2 = page.getResult();
+
+        Page<User> page2 = PageUtil.getPage(pageUtil, example, userMapper);
+
+        List<User> userList3 = page2.getResult();
+
     }
 
 }
